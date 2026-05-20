@@ -30,6 +30,7 @@ Data ships as a pre-built **Room SQLite** file in your APK. Nothing is parsed on
 - [Testing](#testing)
 - [Attribution](#attribution)
 - [License](#license)
+- [Contributing](#contributing)
 
 ---
 
@@ -536,6 +537,12 @@ Text(GeoLocationKit.DATA_ATTRIBUTION)
 ```
 
 Bundled copy: `geo-database-common/src/main/resources/META-INF/ATTRIBUTION.txt`.
+
+---
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for setup, tests, and pull request guidelines. Please follow our [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ---
 
