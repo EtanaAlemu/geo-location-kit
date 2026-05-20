@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.library)
 }
 
+apply(from = rootProject.file("gradle/publish-library.gradle"))
+
 android {
     namespace = "com.etanaalemu.geo.database.common"
     compileSdk {

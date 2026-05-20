@@ -195,6 +195,36 @@ adb shell am start -n com.etanaalemu.demo/.MainActivity
 
 **Requirements:** minSdk **26**, Kotlin **2.2+**, Jetpack Compose if you use `geo-compose`.
 
+### From JitPack (published releases)
+
+[![Release](https://jitpack.io/v/EtanaAlemu/geo-location-kit.svg)](https://jitpack.io/#EtanaAlemu/geo-location-kit)
+
+```kotlin
+// settings.gradle.kts
+dependencyResolutionManagement {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url = uri("https://jitpack.io") }
+    }
+}
+```
+
+```kotlin
+// app/build.gradle.kts — pick one primary module (transitive deps are pulled in)
+dependencies {
+    implementation("com.github.EtanaAlemu:geo-location-kit:1.0.0:geo-compose@")
+    // implementation("com.github.EtanaAlemu:geo-location-kit:1.0.0:geo-database@")
+    // implementation("com.github.EtanaAlemu:geo-location-kit:1.0.0:geo-database-lite@")
+}
+```
+
+Replace `1.0.0` with the [latest release](https://github.com/EtanaAlemu/geo-location-kit/releases) tag.
+
+> **Note:** The full database (`geo-database`) is built from dr5hn on first compile if the asset is missing (~112 MB). The lite module ships a small prebuilt DB in the AAR.
+
+### From source (copy modules into your repo)
+
 ```kotlin
 dependencies {
     implementation(project(":geo-compose"))        // UI + full DB

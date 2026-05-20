@@ -1,0 +1,33 @@
+apply plugin: "maven-publish"
+
+def geoGroup = findProperty("geo.group") ?: "com.github.EtanaAlemu"
+def geoVersion = findProperty("geo.version") ?: "unspecified"
+
+if (plugins.hasPlugin("com.android.library")) {
+    android {
+        publishing {
+            singleVariant("release") {
+                withSourcesJar()
+            }
+        }
+    }
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                groupId = geoGroup
+                artifactId = project.name
+                version = geoVersion
+                if (plugins.hasPlugin("com.android.library")) {
+                    afterEvaluate {
+                        from components.release
+                    }
+                } else {
+                    from components.java
+                }
+            }
+        }
+    }
+}

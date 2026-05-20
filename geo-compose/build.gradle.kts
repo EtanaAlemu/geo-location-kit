@@ -3,6 +3,8 @@ plugins {
     alias(libs.plugins.kotlin.compose)
 }
 
+apply(from = rootProject.file("gradle/publish-library.gradle"))
+
 android {
     namespace = "com.etanaalemu.geo.compose"
     compileSdk {
