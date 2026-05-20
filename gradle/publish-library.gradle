@@ -1,6 +1,6 @@
 apply plugin: "maven-publish"
 
-def geoGroup = findProperty("geo.group") ?: "com.github.EtanaAlemu"
+def geoGroup = findProperty("geo.group") ?: "com.etanaalemu.geo"
 def geoVersion = findProperty("geo.version") ?: "unspecified"
 
 if (plugins.hasPlugin("com.android.library")) {
@@ -26,6 +26,20 @@ afterEvaluate {
                     }
                 } else {
                     from components.java
+                }
+            }
+        }
+        def gprUser = findProperty("gpr.user") ?: System.getenv("GITHUB_ACTOR")
+        def gprKey = findProperty("gpr.key") ?: System.getenv("GITHUB_TOKEN")
+        if (gprUser && gprKey) {
+            repositories {
+                maven {
+                    name = "GitHubPackages"
+                    url = "https://maven.pkg.github.com/EtanaAlemu/geo-location-kit"
+                    credentials {
+                        username = gprUser
+                        password = gprKey
+                    }
                 }
             }
         }

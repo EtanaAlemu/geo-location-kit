@@ -90,9 +90,27 @@ Avoid depending on both `geo-database` and `geo-database-lite` in the same app m
 
 ## Releases and versioning
 
-Library version is set in `gradle.properties` (`geo.version`). Published artifacts use [JitPack](https://jitpack.io/#EtanaAlemu/geo-location-kit) from Git tags (e.g. `v1.0.0`).
+Library version is set in `gradle.properties` (`geo.version`, `geo.group`). Maven `groupId` is **`com.etanaalemu.geo`** (lowercase — required by [GitHub Packages](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-gradle-registry)).
 
-Maintainers: tag releases on `main`, create a [GitHub Release](https://github.com/EtanaAlemu/geo-location-kit/releases), and verify the JitPack build for that tag.
+**Publish flow for maintainers:**
+
+1. Bump `geo.version` in `gradle.properties` and merge to `main`.
+2. Tag `vX.Y.Z` and push: `git tag v1.0.1 && git push origin v1.0.1`.
+3. Create a [GitHub Release](https://github.com/EtanaAlemu/geo-location-kit/releases) from that tag — this runs **Publish to GitHub Packages** automatically.
+4. Verify [Packages](https://github.com/EtanaAlemu/geo-location-kit/packages) and the [JitPack](https://jitpack.io/#EtanaAlemu/geo-location-kit) build for the tag.
+
+**Local publish to GitHub Packages** (optional): add to `~/.gradle/gradle.properties` (never commit tokens):
+
+```properties
+gpr.user=YOUR_GITHUB_USERNAME
+gpr.key=ghp_...   # classic PAT with write:packages (and read:packages)
+```
+
+```bash
+./gradlew publish -Pgeo.version=1.0.0-SNAPSHOT -x test
+```
+
+Or trigger **Publish to GitHub Packages** manually under Actions → workflow_dispatch.
 
 ## Questions
 

@@ -198,6 +198,42 @@ adb shell am start -n com.etanaalemu.demo/.MainActivity
 
 **Requirements:** minSdk **26**, Kotlin **2.2+**, Jetpack Compose if you use `geo-compose`.
 
+### From GitHub Packages (Maven registry)
+
+This project is **Gradle/Android**; artifacts are published in **Maven layout** to GitHub Packages (not a hand-written `pom.xml` in the repo). Public packages can be consumed without auth; private packages need a [personal access token](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-gradle-registry#authenticating-with-a-personal-access-token) with `read:packages`.
+
+```kotlin
+// settings.gradle.kts
+dependencyResolutionManagement {
+    repositories {
+        google()
+        mavenCentral()
+        maven {
+            url = uri("https://maven.pkg.github.com/EtanaAlemu/geo-location-kit")
+            credentials {
+                username = providers.gradleProperty("gpr.user").orNull
+                    ?: System.getenv("GITHUB_ACTOR")
+                    ?: ""
+                password = providers.gradleProperty("gpr.key").orNull
+                    ?: System.getenv("GITHUB_TOKEN")
+                    ?: ""
+            }
+        }
+    }
+}
+```
+
+```kotlin
+// app/build.gradle.kts — artifact IDs are module names (lowercase)
+dependencies {
+    implementation("com.etanaalemu.geo:geo-compose:1.0.0")
+    // implementation("com.etanaalemu.geo:geo-database:1.0.0")
+    // implementation("com.etanaalemu.geo:geo-database-lite:1.0.0")
+}
+```
+
+Published on each [GitHub Release](https://github.com/EtanaAlemu/geo-location-kit/releases) via [`.github/workflows/publish-packages.yml`](.github/workflows/publish-packages.yml). View artifacts under [Packages](https://github.com/EtanaAlemu/geo-location-kit/packages).
+
 ### From JitPack (published releases)
 
 [![Release](https://jitpack.io/v/EtanaAlemu/geo-location-kit.svg)](https://jitpack.io/#EtanaAlemu/geo-location-kit)
