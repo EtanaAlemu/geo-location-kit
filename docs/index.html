@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Geo Location Kit — Android library for countries, states, cities, and phone codes. Offline Room DB + Jetpack Compose pickers." />
+  <title>Geo Location Kit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0f1419;
+      --surface: #1a2332;
+      --border: #2d3a4f;
+      --text: #e8edf4;
+      --muted: #8b9cb3;
+      --accent: #3d9cf5;
+      --accent-dim: #2563a8;
+      --green: #34c759;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "DM Sans", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap { max-width: 960px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+    header { text-align: center; padding: 2rem 0 2.5rem; }
+    .badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent-dim);
+      border-radius: 999px;
+      padding: 0.35rem 0.85rem;
+      margin-bottom: 1rem;
+    }
+    h1 {
+      font-size: clamp(2rem, 5vw, 2.75rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+    .lead {
+      font-size: 1.125rem;
+      color: var(--muted);
+      max-width: 36rem;
+      margin: 0 auto 1.75rem;
+    }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: center;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.65rem 1.25rem;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none !important;
+      transition: transform 0.15s, background 0.15s;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+    .btn-primary:hover { background: #5aadf7; }
+    .btn-secondary {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover { border-color: var(--accent-dim); }
+    section { margin-top: 3rem; }
+    h2 {
+      font-size: 1.35rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-img {
+      display: block;
+      max-width: 280px;
+      width: 100%;
+      margin: 2rem auto 0;
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.45);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.15rem 1.25rem;
+    }
+    .card h3 { font-size: 1rem; margin-bottom: 0.35rem; }
+    .card p { font-size: 0.9rem; color: var(--muted); }
+    pre {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem 1.15rem;
+      overflow-x: auto;
+      font-size: 0.8rem;
+      line-height: 1.5;
+      color: #c5d4e8;
+    }
+    code { font-family: ui-monospace, "Cascadia Code", monospace; }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+    .gallery img {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+    footer {
+      margin-top: 4rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+    .jitpack img { vertical-align: middle; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <span class="badge">Android · Kotlin · Compose</span>
+      <h1>Geo Location Kit</h1>
+      <p class="lead">
+        Offline countries, states, cities, and phone country codes for Android —
+        Room SQLite in your APK, optional searchable Compose pickers, 21 languages.
+      </p>
+      <div class="actions">
+        <a class="btn btn-primary" href="https://github.com/EtanaAlemu/geo-location-kit">View on GitHub</a>
+        <a class="btn btn-secondary" href="https://github.com/EtanaAlemu/geo-location-kit#installation">Documentation</a>
+        <a class="btn btn-secondary" href="https://github.com/EtanaAlemu/geo-location-kit/releases">Releases</a>
+      </div>
+      <img
+        class="hero-img"
+        src="https://raw.githubusercontent.com/EtanaAlemu/geo-location-kit/main/Screenshots/Screenshot_20260520_140943_Geo%20Location%20Kit.jpg"
+        alt="Geo Location Kit demo — main screen"
+        width="320"
+        height="auto"
+        loading="lazy"
+      />
+    </header>
+
+    <section>
+      <h2>Features</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Offline data</h3>
+          <p>Pre-built Room database from dr5hn — no JSON parsing at runtime.</p>
+        </div>
+        <div class="card">
+          <h3>Compose pickers</h3>
+          <p>Country, cascading state/city, language, and phone code UI.</p>
+        </div>
+        <div class="card">
+          <h3>Full &amp; lite</h3>
+          <p>Full DB with cities &amp; FTS, or a ~800 KB lite variant.</p>
+        </div>
+        <div class="card">
+          <h3>Localization</h3>
+          <p>English, app locale, or fixed BCP 47 tags from dr5hn translations.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Install (JitPack)</h2>
+      <p style="color: var(--muted); margin-bottom: 1rem;">
+        <a class="jitpack" href="https://jitpack.io/#EtanaAlemu/geo-location-kit">
+          <img src="https://jitpack.io/v/EtanaAlemu/geo-location-kit.svg" alt="JitPack release" />
+        </a>
+      </p>
+      <pre><code>// settings.gradle.kts
+maven { url = uri("https://jitpack.io") }
+
+// app/build.gradle.kts
+implementation("com.github.EtanaAlemu:geo-location-kit:1.0.0:geo-compose@")</code></pre>
+    </section>
+
+    <section>
+      <h2>Modules</h2>
+      <div class="grid">
+        <div class="card"><h3>geo-compose</h3><p>UI + full database</p></div>
+        <div class="card"><h3>geo-database</h3><p>Full data, no Compose</p></div>
+        <div class="card"><h3>geo-database-lite</h3><p>Countries &amp; states only</p></div>
+        <div class="card"><h3>geo-core</h3><p>Models &amp; repository API</p></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Screenshots</h2>
+      <div class="gallery">
+        <img src="https://raw.githubusercontent.com/EtanaAlemu/geo-location-kit/main/Screenshots/Screenshot_20260520_141004_Geo%20Location%20Kit.jpg" alt="Demo screenshot" loading="lazy" />
+        <img src="https://raw.githubusercontent.com/EtanaAlemu/geo-location-kit/main/Screenshots/Screenshot_20260520_141019_Geo%20Location%20Kit.jpg" alt="Demo screenshot" loading="lazy" />
+        <img src="https://raw.githubusercontent.com/EtanaAlemu/geo-location-kit/main/Screenshots/Screenshot_20260520_141033_Geo%20Location%20Kit.jpg" alt="Demo screenshot" loading="lazy" />
+        <img src="https://raw.githubusercontent.com/EtanaAlemu/geo-location-kit/main/Screenshots/Screenshot_20260520_141043_Geo%20Location%20Kit.jpg" alt="Demo screenshot" loading="lazy" />
+        <img src="https://raw.githubusercontent.com/EtanaAlemu/geo-location-kit/main/Screenshots/Screenshot_20260520_141052_Geo%20Location%20Kit.jpg" alt="Demo screenshot" loading="lazy" />
+      </div>
+    </section>
+
+    <section>
+      <h2>Contributing</h2>
+      <p style="color: var(--muted);">
+        See <a href="https://github.com/EtanaAlemu/geo-location-kit/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a>
+        and our <a href="https://github.com/EtanaAlemu/geo-location-kit/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a>.
+        Geographic data is <a href="https://opendatacommons.org/licenses/odbl/">ODbL</a> — attribution required in apps.
+      </p>
+    </section>
+
+    <footer>
+      <p>
+        Library: <a href="https://github.com/EtanaAlemu/geo-location-kit/blob/main/LICENSE">MIT</a> ·
+        Data: <a href="https://github.com/dr5hn/countries-states-cities-database">dr5hn</a> ·
+        © 2026 Etana Alemu
+      </p>
+    </footer>
+  </div>
+</body>
+</html>
