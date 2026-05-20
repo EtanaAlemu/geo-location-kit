@@ -1,7 +1,25 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
 }
+
+fun localProperty(name: String): String? {
+    val file = rootProject.file("local.properties")
+    if (!file.exists()) return null
+    return Properties().apply { file.inputStream().use { load(it) } }.getProperty(name)
+}
+
+val usePublishedGeo =
+    (findProperty("geo.usePublished") as String? ?: localProperty("geo.usePublished")) == "true"
+val publishedGeoVersion =
+    findProperty("geo.version") as String? ?: localProperty("geo.version") ?: "1.0.0"
+// 1.0.0 on GitHub Packages uses com.etanaalemu.geo; use io.github.etanaalemu after Maven Central publish
+val publishedGeoGroup =
+    findProperty("geo.publishedGroup") as String?
+        ?: localProperty("geo.publishedGroup")
+        ?: "com.etanaalemu.geo"
 
 android {
     namespace = "com.etanaalemu.demo"
@@ -36,7 +54,11 @@ android {
 }
 
 dependencies {
-    implementation(project(":geo-compose"))
+    if (usePublishedGeo) {
+        implementation("$publishedGeoGroup:geo-compose:$publishedGeoVersion")
+    } else {
+        implementation(project(":geo-compose"))
+    }
     implementation(libs.androidx.appcompat)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.activity.compose)
@@ -48,4 +70,19 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.lifecycle.runtime.compose)
     debugImplementation(libs.androidx.compose.ui.tooling)
+}
+
+if (usePublishedGeo) {
+    val hasGpr = !localProperty("gpr.user").isNullOrBlank() && !localProperty("gpr.key").isNullOrBlank()
+    val source = when {
+        publishedGeoGroup == "io.github.etanaalemu" && hasGpr ->
+            "Maven Central and/or GitHub Packages"
+        publishedGeoGroup == "io.github.etanaalemu" ->
+            "Maven Central (not published yet? use geo.publishedGroup=com.etanaalemu.geo + gpr for GitHub Packages 1.0.0)"
+        hasGpr -> "GitHub Packages"
+        else -> "UNCONFIGURED — add gpr.user and gpr.key to local.properties for GitHub Packages"
+    }
+    logger.lifecycle(
+        "Demo app uses published $publishedGeoGroup:geo-compose:$publishedGeoVersion ($source).",
+    )
 }

@@ -90,14 +90,15 @@ Avoid depending on both `geo-database` and `geo-database-lite` in the same app m
 
 ## Releases and versioning
 
-Library version is set in `gradle.properties` (`geo.version`, `geo.group`). Maven `groupId` is **`com.etanaalemu.geo`** (lowercase — required by [GitHub Packages](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-gradle-registry)).
+Library version is set in `gradle.properties` (`geo.version`, `geo.group`). Maven `groupId` is **`io.github.etanaalemu`** (verified on [Maven Central](https://central.sonatype.com/); Kotlin packages remain `com.etanaalemu.geo.*`).
 
 **Publish flow for maintainers:**
 
-1. Bump `geo.version` in `gradle.properties` and merge to `main`.
-2. Tag `vX.Y.Z` and push: `git tag v1.0.1 && git push origin v1.0.1`.
-3. Create a [GitHub Release](https://github.com/EtanaAlemu/geo-location-kit/releases) from that tag — this runs **Publish to GitHub Packages** automatically.
-4. Verify [Packages](https://github.com/EtanaAlemu/geo-location-kit/packages) and the [JitPack](https://jitpack.io/#EtanaAlemu/geo-location-kit) build for the tag.
+1. Complete one-time [Maven Central setup](MAVEN_CENTRAL.md) (namespace, portal token, GPG, GitHub secrets).
+2. Bump `geo.version` in `gradle.properties` and merge to `main`.
+3. Tag `vX.Y.Z` and push: `git tag v1.0.1 && git push origin v1.0.1`.
+4. Create a [GitHub Release](https://github.com/EtanaAlemu/geo-location-kit/releases) from that tag — this runs **Publish packages** (Maven Central + GitHub Packages).
+5. Wait ~10–30 minutes, then verify [Maven Central](https://central.sonatype.com/), [GitHub Packages](https://github.com/EtanaAlemu/geo-location-kit/packages), and [JitPack](https://jitpack.io/#EtanaAlemu/geo-location-kit).
 
 **Local publish to GitHub Packages** (optional): add to `~/.gradle/gradle.properties` (never commit tokens):
 

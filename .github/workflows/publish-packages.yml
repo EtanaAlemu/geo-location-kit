@@ -1,4 +1,4 @@
-name: Publish to GitHub Packages
+name: Publish packages
 
 on:
   release:
@@ -53,7 +53,19 @@ jobs:
             echo "value=${TAG#v}" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Publish library modules
+      - name: Publish to Maven Central
+        env:
+          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
+          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.SIGNING_KEY }}
+          ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.SIGNING_PASSWORD }}
+        run: >
+          ./gradlew publishAndReleaseToMavenCentral
+          -Pgeo.version=${{ steps.version.outputs.value }}
+          -x test
+          --no-daemon
+
+      - name: Publish to GitHub Packages
         env:
           GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

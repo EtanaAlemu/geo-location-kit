@@ -51,4 +51,4 @@ jobs:
           --no-daemon
 
       - name: Assemble demo app (generates location.db if missing)
-        run: ./gradlew :app:assembleDebug --no-daemon
+        run: ./gradlew :app:assembleDebug -Pgeo.usePublished=false --no-daemon
