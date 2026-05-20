@@ -1,0 +1,2 @@
+Location data © dr5hn (countries-states-cities-database), ODbL.
+https://github.com/dr5hn/countries-states-cities-database

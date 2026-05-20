@@ -1,0 +1,30 @@
+# Gradle / Android build
+.gradle/
+**/build/
+build/
+.kotlin/
+local.properties
+*.iml
+.externalNativeBuild/
+.cxx/
+captures/
+*.apk
+*.ap_
+*.dex
+*.class
+
+# IDE
+.idea/
+.vscode/
+*.ipr
+*.iws
+.DS_Store
+
+# JVM module outputs (do not commit)
+**/bin/
+
+# Generated databases (built by geo-db-builder; see README)
+geo-db-builder/build/dr5hn/
+geo-database/src/main/assets/databases/location.db
+
+# Lite DB is small (~800 KB) and committed so :geo-database-lite works without a download step.

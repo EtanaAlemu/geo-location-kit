@@ -1,0 +1,4 @@
+[
+  {"id": 100, "name": "Alpha City", "state_id": 10, "country_id": 1, "latitude": "1.0", "longitude": "2.0"},
+  {"id": 101, "name": "Beta Town", "state_id": 10, "country_id": 1, "latitude": "3.0", "longitude": "4.0"}
+]

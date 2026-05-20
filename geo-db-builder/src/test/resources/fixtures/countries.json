@@ -1,0 +1,13 @@
+[
+  {
+    "id": 1,
+    "name": "Testland",
+    "iso2": "TL",
+    "iso3": "TST",
+    "phone_code": "999",
+    "currency": "TSD",
+    "capital": "Test City",
+    "native": "ቴስትላንድ",
+    "translations": { "fr": "Terre de test" }
+  }
+]
