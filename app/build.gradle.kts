@@ -14,12 +14,11 @@ fun localProperty(name: String): String? {
 val usePublishedGeo =
     (findProperty("geo.usePublished") as String? ?: localProperty("geo.usePublished")) == "true"
 val publishedGeoVersion =
-    findProperty("geo.version") as String? ?: localProperty("geo.version") ?: "1.0.0"
-// 1.0.0 on GitHub Packages uses com.etanaalemu.geo; use io.github.etanaalemu after Maven Central publish
+    findProperty("geo.version") as String? ?: localProperty("geo.version") ?: "1.0.2"
 val publishedGeoGroup =
     findProperty("geo.publishedGroup") as String?
         ?: localProperty("geo.publishedGroup")
-        ?: "com.etanaalemu.geo"
+        ?: "io.github.etanaalemu"
 
 android {
     namespace = "com.etanaalemu.demo"
@@ -73,16 +72,10 @@ dependencies {
 }
 
 if (usePublishedGeo) {
-    val hasGpr = !localProperty("gpr.user").isNullOrBlank() && !localProperty("gpr.key").isNullOrBlank()
-    val source = when {
-        publishedGeoGroup == "io.github.etanaalemu" && hasGpr ->
-            "Maven Central and/or GitHub Packages"
-        publishedGeoGroup == "io.github.etanaalemu" ->
-            "Maven Central (not published yet? use geo.publishedGroup=com.etanaalemu.geo + gpr for GitHub Packages 1.0.0)"
-        hasGpr -> "GitHub Packages"
-        else -> "UNCONFIGURED — add gpr.user and gpr.key to local.properties for GitHub Packages"
-    }
+    val source =
+        if (publishedGeoGroup == "io.github.etanaalemu") "Maven Central"
+        else "GitHub Packages (requires gpr.user and gpr.key in local.properties)"
     logger.lifecycle(
-        "Demo app uses published $publishedGeoGroup:geo-compose:$publishedGeoVersion ($source).",
+        "Demo app uses published $publishedGeoGroup:geo-compose:$publishedGeoVersion from $source.",
     )
 }

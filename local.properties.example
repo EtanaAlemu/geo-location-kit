@@ -12,7 +12,7 @@ gpr.key=ghp_...   # classic PAT with read:packages
 # Maven Central — after you publish io.github.etanaalemu:geo-compose:1.0.1+ (no gpr needed):
 # geo.usePublished=true
 # geo.publishedGroup=io.github.etanaalemu
-# geo.version=1.0.1
+# geo.version=1.0.2
 
 # Local modules (default for day-to-day dev):
 # geo.usePublished=false
