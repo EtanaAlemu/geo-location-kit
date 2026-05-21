@@ -96,7 +96,7 @@ Library version is set in `gradle.properties` (`geo.version`, `geo.group`). Mave
 
 1. Complete one-time [Maven Central setup](MAVEN_CENTRAL.md) (namespace, portal token, GPG, GitHub secrets).
 2. Bump `geo.version` in `gradle.properties` and merge to `main`.
-3. Tag `vX.Y.Z` and push: `git tag v1.0.1 && git push origin v1.0.1`.
+3. Tag `vX.Y.Z` and push: `git tag v1.0.3 && git push origin v1.0.3`.
 4. Create a [GitHub Release](https://github.com/EtanaAlemu/geo-location-kit/releases) from that tag — this runs **Publish packages** (Maven Central + GitHub Packages).
 5. Wait ~10–30 minutes, then verify [Maven Central](https://central.sonatype.com/), [GitHub Packages](https://github.com/EtanaAlemu/geo-location-kit/packages), and [JitPack](https://jitpack.io/#EtanaAlemu/geo-location-kit).
 

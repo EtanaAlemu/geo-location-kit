@@ -1,18 +1,13 @@
-# Copy these lines into local.properties (gitignored; keep your sdk.dir=... line).
+# Copy into local.properties (gitignored; keep sdk.dir=...)
 
-# --- Test published library in :app (geo.usePublished=true) ---
-
-# GitHub Packages — works today for release 1.0.0 (group com.etanaalemu.geo):
+# Test Maven Central release in :app (no token)
 geo.usePublished=true
-geo.publishedGroup=com.etanaalemu.geo
-geo.version=1.0.0
-gpr.user=YOUR_GITHUB_USERNAME
-gpr.key=ghp_...   # classic PAT with read:packages
+geo.publishedGroup=io.github.etanaalemu
+geo.version=1.0.2
 
-# Maven Central — after you publish io.github.etanaalemu:geo-compose:1.0.1+ (no gpr needed):
-# geo.usePublished=true
-# geo.publishedGroup=io.github.etanaalemu
-# geo.version=1.0.2
-
-# Local modules (default for day-to-day dev):
+# Local modules (default for development)
 # geo.usePublished=false
+
+# GitHub Packages (optional; classic PAT with read:packages)
+# gpr.user=YOUR_GITHUB_USERNAME
+# gpr.key=ghp_...

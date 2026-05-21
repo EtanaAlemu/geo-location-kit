@@ -1,6 +1,10 @@
 # Geo Location Kit
 
-**Site:** [etanaalemu.github.io/geo-location-kit](https://etanaalemu.github.io/geo-location-kit/)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.etanaalemu/geo-compose?label=Maven%20Central)](https://search.maven.org/search?q=g:io.github.etanaalemu)
+[![GitHub release](https://img.shields.io/github/v/release/EtanaAlemu/geo-location-kit?label=release)](https://github.com/EtanaAlemu/geo-location-kit/releases/latest)
+[![JitPack](https://jitpack.io/v/EtanaAlemu/geo-location-kit.svg)](https://jitpack.io/#EtanaAlemu/geo-location-kit)
+
+**Site:** [etanaalemu.github.io/geo-location-kit](https://etanaalemu.github.io/geo-location-kit/) · **Latest:** `1.0.2`
 
 Android library for **countries**, **states/regions**, **cities**, and **phone country codes** — backed by the [dr5hn countries-states-cities-database](https://github.com/dr5hn/countries-states-cities-database).
 
@@ -200,7 +204,7 @@ adb shell am start -n com.etanaalemu.demo/.MainActivity
 
 ### From Maven Central (recommended)
 
-After a release is published to [Maven Central](https://central.sonatype.com/), use standard `mavenCentral()` — **no extra repository or token**:
+Published on [Maven Central](https://search.maven.org/search?q=g:io.github.etanaalemu) as **`io.github.etanaalemu`**. Use `mavenCentral()` only — **no token**:
 
 ```kotlin
 // settings.gradle.kts
@@ -215,13 +219,19 @@ dependencyResolutionManagement {
 ```kotlin
 // app/build.gradle.kts
 dependencies {
-    implementation("io.github.etanaalemu:geo-compose:1.0.0")
-    // implementation("io.github.etanaalemu:geo-database:1.0.0")
-    // implementation("io.github.etanaalemu:geo-database-lite:1.0.0")
+    implementation("io.github.etanaalemu:geo-compose:1.0.2")
+    // implementation("io.github.etanaalemu:geo-database:1.0.2")
+    // implementation("io.github.etanaalemu:geo-database-lite:1.0.2")
 }
 ```
 
-Maintainers: see [MAVEN_CENTRAL.md](MAVEN_CENTRAL.md) for namespace registration, GPG signing, and CI secrets.
+| Module | Maven coordinate |
+|--------|------------------|
+| Compose UI + full DB | `io.github.etanaalemu:geo-compose:1.0.2` |
+| Full DB only | `io.github.etanaalemu:geo-database:1.0.2` |
+| Lite DB | `io.github.etanaalemu:geo-database-lite:1.0.2` |
+
+Maintainers: see [MAVEN_CENTRAL.md](MAVEN_CENTRAL.md).
 
 ### From GitHub Packages
 
@@ -249,15 +259,12 @@ dependencyResolutionManagement {
 ```
 
 ```kotlin
-// app/build.gradle.kts — artifact IDs are module names (lowercase)
 dependencies {
-    implementation("io.github.etanaalemu:geo-compose:1.0.0")
-    // implementation("io.github.etanaalemu:geo-database:1.0.0")
-    // implementation("io.github.etanaalemu:geo-database-lite:1.0.0")
+    implementation("io.github.etanaalemu:geo-compose:1.0.2")
 }
 ```
 
-Published on each [GitHub Release](https://github.com/EtanaAlemu/geo-location-kit/releases) via [`.github/workflows/publish-packages.yml`](.github/workflows/publish-packages.yml) (Maven Central + GitHub Packages). View GitHub artifacts under [Packages](https://github.com/EtanaAlemu/geo-location-kit/packages).
+Also published to [GitHub Packages](https://github.com/EtanaAlemu/geo-location-kit/packages) on each release ([workflow](.github/workflows/publish-packages.yml)). Prefer **Maven Central** for public apps (no `read:packages` token).
 
 ### From JitPack (published releases)
 
@@ -275,15 +282,13 @@ dependencyResolutionManagement {
 ```
 
 ```kotlin
-// app/build.gradle.kts — pick one primary module (transitive deps are pulled in)
 dependencies {
-    implementation("com.github.EtanaAlemu:geo-location-kit:1.0.0:geo-compose@")
-    // implementation("com.github.EtanaAlemu:geo-location-kit:1.0.0:geo-database@")
-    // implementation("com.github.EtanaAlemu:geo-location-kit:1.0.0:geo-database-lite@")
+    implementation("com.github.EtanaAlemu:geo-location-kit:1.0.2:geo-compose@")
+    // implementation("com.github.EtanaAlemu:geo-location-kit:1.0.2:geo-database@")
 }
 ```
 
-Replace `1.0.0` with the [latest release](https://github.com/EtanaAlemu/geo-location-kit/releases) tag.
+Replace `1.0.2` with the [latest release](https://github.com/EtanaAlemu/geo-location-kit/releases/latest) tag.
 
 > **Note:** The full database (`geo-database`) is built from dr5hn on first compile if the asset is missing (~112 MB). The lite module ships a small prebuilt DB in the AAR.
 
@@ -499,18 +504,19 @@ adb shell am start -n com.etanaalemu.demo/.MainActivity
 
 ### Test the published package in the demo app
 
-By default the demo uses `project(":geo-compose")`. To install the **GitHub Packages** artifact instead:
+By default the demo uses `project(":geo-compose")`. To consume **Maven Central `1.0.2`** instead, add to `local.properties`:
 
-1. Copy [`local.properties.example`](local.properties.example) → `local.properties` (or add these lines to your existing `local.properties`).
-2. For **GitHub Packages `1.0.0`** (available now): `geo.publishedGroup=com.etanaalemu.geo`, plus `gpr.user` / `gpr.key` (classic PAT with **`read:packages`**).
-3. For **Maven Central** (after you publish): `geo.publishedGroup=io.github.etanaalemu` — no token required.
-4. Build:
+```properties
+geo.usePublished=true
+geo.publishedGroup=io.github.etanaalemu
+geo.version=1.0.2
+```
 
 ```bash
 ./gradlew :app:installDebug
 ```
 
-Gradle resolves **`com.etanaalemu.geo:geo-compose:1.0.0`** from **GitHub Packages** (needs `gpr.user` / `gpr.key`), or **`io.github.etanaalemu:*`** from **Maven Central** after that release is published. Switch back with `geo.usePublished=false` or remove those lines.
+See [`local.properties.example`](local.properties.example). Switch back with `geo.usePublished=false`.
 
 ---
 

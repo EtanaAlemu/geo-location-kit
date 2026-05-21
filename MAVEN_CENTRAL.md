@@ -4,7 +4,7 @@ Geo Location Kit can be consumed from **Maven Central** (no GitHub token require
 
 ```kotlin
 // settings.gradle.kts — mavenCentral() is enough
-implementation("io.github.etanaalemu:geo-compose:1.0.0")
+implementation("io.github.etanaalemu:geo-compose:1.0.2")
 ```
 
 **Published Maven coordinates** use `groupId` **`io.github.etanaalemu`** (verified namespace on Central Portal). **Kotlin/Android code** still uses packages `com.etanaalemu.geo.*` — that is normal and unrelated to the Maven groupId.
@@ -67,7 +67,7 @@ signingInMemoryKeyPassword=...
 ## Publish a release
 
 1. Bump `geo.version` in `gradle.properties`.
-2. Tag and create a [GitHub Release](https://github.com/EtanaAlemu/geo-location-kit/releases) (e.g. `v1.0.1`).
+2. Tag and create a [GitHub Release](https://github.com/EtanaAlemu/geo-location-kit/releases) (e.g. `v1.0.3`).
 3. The **Publish packages** workflow runs:
    - `publishAndReleaseToMavenCentral` → Maven Central (`io.github.etanaalemu:*`)
    - `publish` → GitHub Packages
@@ -76,7 +76,7 @@ signingInMemoryKeyPassword=...
 ### Manual publish
 
 ```bash
-./gradlew publishAndReleaseToMavenCentral publish -Pgeo.version=1.0.0 -x test
+./gradlew publishAndReleaseToMavenCentral publish -Pgeo.version=1.0.2 -x test
 ```
 
 Snapshots (no signing required):

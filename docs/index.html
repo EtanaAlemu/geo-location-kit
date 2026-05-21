@@ -194,17 +194,32 @@
     </section>
 
     <section>
-      <h2>Install (JitPack)</h2>
+      <h2>Install</h2>
       <p style="color: var(--muted); margin-bottom: 1rem;">
+        <strong>Latest:</strong> <code>1.0.2</code> ·
+        <a href="https://search.maven.org/search?q=g:io.github.etanaalemu">Maven Central</a> ·
+        <a href="https://github.com/EtanaAlemu/geo-location-kit/packages">GitHub Packages</a> ·
         <a class="jitpack" href="https://jitpack.io/#EtanaAlemu/geo-location-kit">
-          <img src="https://jitpack.io/v/EtanaAlemu/geo-location-kit.svg" alt="JitPack release" />
+          <img src="https://jitpack.io/v/EtanaAlemu/geo-location-kit.svg" alt="JitPack" style="vertical-align: middle;" />
         </a>
       </p>
-      <pre><code>// settings.gradle.kts
-maven { url = uri("https://jitpack.io") }
 
-// app/build.gradle.kts
-implementation("com.github.EtanaAlemu:geo-location-kit:1.0.0:geo-compose@")</code></pre>
+      <h3 style="font-size: 1rem; margin: 1.25rem 0 0.5rem;">Maven Central (recommended)</h3>
+      <pre><code>// settings.gradle.kts — mavenCentral() only
+dependencies {
+    implementation("io.github.etanaalemu:geo-compose:1.0.2")
+}</code></pre>
+
+      <h3 style="font-size: 1rem; margin: 1.25rem 0 0.5rem;">GitHub Packages</h3>
+      <pre><code>maven {
+    url = uri("https://maven.pkg.github.com/EtanaAlemu/geo-location-kit")
+    credentials { /* gpr.user + gpr.key */ }
+}
+implementation("io.github.etanaalemu:geo-compose:1.0.2")</code></pre>
+
+      <h3 style="font-size: 1rem; margin: 1.25rem 0 0.5rem;">JitPack</h3>
+      <pre><code>maven { url = uri("https://jitpack.io") }
+implementation("com.github.EtanaAlemu:geo-location-kit:1.0.2:geo-compose@")</code></pre>
     </section>
 
     <section>
